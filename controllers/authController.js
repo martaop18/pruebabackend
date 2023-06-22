@@ -9,17 +9,16 @@ const authController = {};
 authController.register = async (req, res) => {
   try {
     const password = req.body.password;
-    if (password.length < 6) {
-      return res.send("Password must be longer than 6 characters");
+    if (password.length < 8) {
+      return res.send("Password must be longer than 8 characters");
     }
-    const newPassword = bcrypt.hashSync(req.body.password, 8);
+    const newPassword = bcrypt.hashSync(req.body.password, 10);
 
     const newUser = await User.create({
       name: req.body.name,
       lastname: req.body.lastname,
       email: req.body.email,
       password: newPassword,
-      phone: req.body.phone,
       role_id: req.body.role_id,
     });
 
